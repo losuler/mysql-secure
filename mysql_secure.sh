@@ -1,22 +1,18 @@
 #!/bin/bash
 
-#
 # Check the bash shell script is being run by root
-#
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2
-   exit 1
+    echo "This script must be run as root" 1>&2
+    exit 1
 fi
 
-#
 # Check input params
-#
 if [ -n "${1}" -a -z "${2}" ]; then
     # Setup root password
     CURRENT_MYSQL_PASSWORD=''
     NEW_MYSQL_PASSWORD="${1}"
 elif [ -n "${1}" -a -n "${2}" ]; then
-    # Change existens root password
+    # Change existing root password
     CURRENT_MYSQL_PASSWORD="${1}"
     NEW_MYSQL_PASSWORD="${2}"
 else
@@ -65,9 +61,7 @@ send \"y\r\"
 expect eof
 ")
 
-#
-# Execution mysql_secure_installation
-#
+# Execute mysql_secure_installation
 echo "${SECURE_MYSQL}"
 
 exit 0
