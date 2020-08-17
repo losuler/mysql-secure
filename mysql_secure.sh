@@ -37,6 +37,9 @@ spawn mysql_secure_installation
 expect \"Enter current password for root (enter for none):\"
 send \"$CURRENT_MYSQL_PASSWORD\r\"
 
+expect \"unix_socket authentication?\"
+send \"y\r\"
+
 expect \"root password?\"
 send \"y\r\"
 
