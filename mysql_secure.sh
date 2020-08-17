@@ -17,8 +17,8 @@ elif [ -n "${1}" -a -n "${2}" ]; then
     NEW_MYSQL_PASSWORD="${2}"
 else
     echo "Usage:"
-    echo "  Setup mysql root password: ${0} 'your_new_root_password'"
-    echo "  Change mysql root password: ${0} 'your_old_root_password' 'your_new_root_password'"
+    echo "  Setup MariaDB root password: ${0} 'your_current_root_password'"
+    echo "  Change MariaDB root password: ${0} 'your_old_root_password' 'your_new_root_password'"
     exit 1
 fi
 
