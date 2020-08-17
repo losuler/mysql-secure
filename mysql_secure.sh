@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Delete package expect when script is done
-# 0 - No; 
-# 1 - Yes.
-PURGE_EXPECT_WHEN_DONE=0
-
 #
 # Check the bash shell script is being run by root
 #
@@ -31,13 +26,11 @@ else
     exit 1
 fi
 
-#
-# Check is expect package installed
-#
-if [ $(dpkg-query -W -f='${Status}' expect 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-    echo "Can't find expect. Trying install it..."
-    aptitude -y install expect
-
+# Check expect package installed
+if ! command -v expect &> /dev/null
+then
+    echo "[ERROR] expect could not be found"
+    exit 1
 fi
 
 SECURE_MYSQL=$(expect -c "
@@ -76,10 +69,5 @@ expect eof
 # Execution mysql_secure_installation
 #
 echo "${SECURE_MYSQL}"
-
-if [ "${PURGE_EXPECT_WHEN_DONE}" -eq 1 ]; then
-    # Uninstalling expect package
-    aptitude -y purge expect
-fi
 
 exit 0
